@@ -220,4 +220,4 @@ if __name__ == "__main__":
 I encountered a challenge when I first executed the script to launch the GUI application. I realized that I had to specify the python version i.e. python3 to execute the application. Also, tkinter was missing in the initial install of Python so I had to execute the reinstall tkinter using the command `sudo apt-install python3-tk`
 ### Outcome
 ![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/pythons3uploaderapplication.PNG)
-
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/fileuploadedviapp.PNG)
