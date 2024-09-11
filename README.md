@@ -6,53 +6,52 @@ Tasks:
 
 ## 1. Creating an Amazon S3 Bucket:
 
-###Steps
+### Steps
 1. Set the region to `us-west-2` 
 2. Click the Create bucket button on the console.
 3. Keep settings default
-4. Choose a unique name `week7skillsyncbucket`  
-<week7skillsyncbucket>
-###Challenges
+4. Choose a unique name `week7skillsyncbucket`
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/week7skillsyncbucket.png)
+### Challenges
 I did not experience any challenges
-###Outcomes
+### Outcomes
 An S3 bucket with the name `week7skillsyncbucket`
  
 ## 2. Upload a Sample File:
 
-###Steps
+### Steps
 1. Click on the `week7skillsyncbucket`
 2. Click `Upload` to open upload widget
 3. Click `Add files` to open file explorer. Select a file then click `Open`
 4. Once file is loaded, Click `Upload` to upload the file
 5. Click on the uploaded file to reveal its properties
 6. Copy the Object URL to a new tab then observe 
-<uploadedobject>
-###Challenges
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/uploadedobject.png)
+### Challenges
 I did not experience any challenges
-###Outcomes
+### Outcomes
 The file will be uploaded successfully. However, when trying to access the file via the Object URL, I get an error
 message.
-<errormessage> 
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/errormessage.png) 
 
 3. Apply a Bucket Policy:
 
-###Steps
+### Steps
 1. Navigate to IAM > Users > Chan
 2. Click on `Add Permissions`
 3. Select `Attach policies directly` 
 4. Search for `AmazonS3ReadOnly` in the Permissions policies and select it. Click `Next`
 5. Click `Add Permissions` to grant read-only access to Chan.
-<s3readonlyaccess>
-###Challenges
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/s3readonlyaccess.png)
+### Challenges
 I did not experience any challenges
-###Outcomes
+### Outcomes
 User Chan can only view the object inside the S3 bucket. But when Chan attempts to either upload or delete the object, he gets the error message, `Access Denied`.
-<
-<s3bucketpolicyuploadfail>  
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/s3bucketpolicyuploadfail.png)  
 
 4. Set Up IAM Permissions:
 
-###Steps
+### Steps
 1. Navigate to IAM > Policies > Create policy
 2. Choose S3 Service
 3. Search `putobject` and select
@@ -62,19 +61,19 @@ User Chan can only view the object inside the S3 bucket. But when Chan attempts 
 7. Create group
 8. Provie the User Group name
 9. Add user Chan to the group. Attach the `S3Uploadfiles` policy to the IAM Group. Create user group
-<iamusergroup>
-<putobjectpolicyrole>
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/iamusergroup.png)
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/putbojectpolicyrole.PNG)
 
-###Challenges
+### Challenges
 I did not experience any challenge
 
-###Outcomes
+### Outcomes
 User Chan could upload a file to the bucket.
-<fileuploadsuccess>
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/fileuploadsuccess.png)
 
 5. Assign an IAM Role to EC2:
 
-###Steps
+### Steps
 1. Navigate to IAM > Roles
 2. Create role
 3. Select AWS service as Trusted Entity Type
@@ -85,45 +84,45 @@ User Chan could upload a file to the bucket.
 8. Once EC2 instance is running, Connect to the instance to access the terminal
 9. Type `aws s3 cp wget-log s3://week7skillsyncbucket` to test file upload to S3 from the EC2 instance
 10. Confirmed that the file was uploaded using the command `aws s3 ls s3://week7skillsyncbucket --recursive`
-###Challenges
+### Challenges
 I experienced problems at first, trying to connect the EC2 instance until I found out that I had launched the instance in a private subnet. So i had to terminate and recreate the instance in a public subnet and also enabled the auto-assign Public IP as that too, was preventing me from accessing the ec2 instance via SSH. 
-###Outcomes
-<iamroleattached>
-<uploadedwgetlogviaec2>
+### Outcomes
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/iamroleattached.png)
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/uploadedwgetlogviaec2.png)
 6. Enable Versioning:
 
-###Steps
+### Steps
 1. Open EC2 terminal
 2. Type in the command `aws s3api put-bucket-versioning --bucket week7skillsyncbucket --versioning-configuration Status=Enabled
 3. Navigate to S3 Bucket properties page to confirm Versioning status
 4. Upload wget-log multiple times and make changes to it, for each attempt
 5. Delete the original wget-log file
 6. Toggle the `show versions` button to reveal the version trail of the wget-log file
-###Challenges
+### Challenges
 I did not experience any challenges
-###Outcome
-<s3versioningenabled>
-<objectversionsuploaded>
-<bucketversioningenabled>
+### Outcome
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/s3versioningenabled.png)
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/objectversionsuploaded.png)
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/bucketversioningenabled.png)
 
 7. Configure Logging:
 
-###Steps
+### Steps
 1. Navigate to Amazon S3> Buckets> week7skillsyncbucket
 2. Edit Server access logging
 3. Enable server access logging
 4. Choose secondary bucket `Week7bucketklogs`
 5. select the log object key format
 6. Save changes
-###Challenges
+### Challenges
 I did not experience any challenges
-###Outcome
-<loggingconfiguration>
-<week7skillsynclogscaptured>
+### Outcome
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/loggingconfiguration.png)
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/week7skillsynclogscaptured.PNG)
 
 8. Integrate S3 with an Application:
 
-###Steps
+### Steps
 1. Access VSCode 
 2. Opened Debian terminal from VSCode to download Python3 using the following commands:
 ```
@@ -217,10 +216,8 @@ if __name__ == "__main__":
 `python3 s3uploadergui.py`
 8. The GUI popped up and I interacted with the GUI, using Browse and Upload functionality. 
 
-###Challenges
+### Challenges
 I encountered a challenge when I first executed the script to launch the GUI application. I realized that I had to specify the python version i.e. python3 to execute the application. Also, tkinter was missing in the initial install of Python so I had to execute the reinstall tkinter using the command `sudo apt-install python3-tk`
-###Outcome
-<pythons3uploaderapplication>
+### Outcome
+![Snapshot](https://github.com/slimfeet/Week7S3Task/blob/main/pythons3uploaderapplication.PNG)
 
-    Modify an existing application to handle file uploads and save them to your S3 bucket.
-    Ensure that the application can read, write, and delete files in the bucket as required.
