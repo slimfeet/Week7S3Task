@@ -1,6 +1,6 @@
 
 # Mastering Amazon S3 Bucket Configuration and Access Control
-This assignment shows the  process of setting up and managing an Amazon S3 bucket. 
+This project shows the entire process of setting up and managing an Amazon S3 bucket. 
 
 Tasks:
 
